@@ -1,4 +1,3 @@
-// app/_layout.tsx
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { PaperProvider, Text } from 'react-native-paper';
@@ -8,12 +7,10 @@ import { useEffect } from 'react';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { ThemeProvider, useTheme } from '@/components/ThemeProvider';
 
-// ФИКС: Игнорировать предупреждения Reanimated
 LogBox.ignoreLogs([
   '[Reanimated]',
 ]);
 
-// Компонент для отображения загрузки
 function LoadingScreen() {
   const { theme } = useTheme();
   
@@ -38,12 +35,10 @@ function LoadingScreen() {
   );
 }
 
-// Основной компонент приложения с темами
 function AppContent() {
   const { user, isLoading, logout } = useAuth();
   const { theme } = useTheme();
 
-  // Для отладки
   useEffect(() => {
     console.log('User:', user);
   }, [user, isLoading]);

@@ -18,14 +18,11 @@ import {AuthScreenStyles} from "@/styles/auth/AuthScreenStyles"
   const [snackbarMessage, setSnackbarMessage] = useState('');
 const theme = useTheme();
 const styles = AuthScreenStyles(theme); 
-  // Перенаправление при успешной авторизации
   useEffect(() => {
     if (user) {
       console.log('User authenticated, redirecting to tasks...'); 
-      // Используем replace чтобы нельзя было вернуться назад к auth
       router.replace('/(tabs)');     
     }
-      // router.replace('/(tabs)');     
 
   }, [user, router]);
 

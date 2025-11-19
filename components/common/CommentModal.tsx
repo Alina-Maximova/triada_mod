@@ -1,4 +1,3 @@
-// components/common/CommentModal.tsx
 import React, { useState, useEffect } from 'react';
 import { View } from 'react-native';
 import { Text, Button, TextInput, useTheme, Portal, Dialog } from 'react-native-paper';
@@ -38,10 +37,8 @@ export const CommentModal: React.FC<CommentModalProps> = ({
     
     try {
       await onSave(comment.trim());
-      // Закрываем модальное окно после успешного сохранения
       handleClose();
     } catch (error) {
-      // Ошибка обрабатывается в родительском компоненте
       console.error('Error saving comment:', error);
     }
   };
