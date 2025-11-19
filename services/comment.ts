@@ -33,12 +33,13 @@ export const commentsAPI = {
   getTaskComments: async (taskId: number): Promise<Comment[]> => {
     try {
       const response = await api.get(`/comments/task/${taskId}`);
+      console.log(api)
       return response.data;
     } catch (error: any) {
       const message = error.response?.data?.message || 'Ошибка загрузки комментариев';
       throw new Error(message);
     }
-  },
+  },   
 
   addComment: async (data: CreateCommentData): Promise<Comment> => {
     try {

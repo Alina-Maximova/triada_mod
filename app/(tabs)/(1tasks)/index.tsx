@@ -398,6 +398,7 @@ export default function TasksScreen() {
       setIsLoggingOut(true);
       await NotificationService.cancelAllReminders();
       await logout();
+       router.replace('/(auth)');   
     } catch (error: any) {
       console.log('❌ Ошибка при выходе из системы:', error);
       setSnackbarMessage('Ошибка при выходе: ' + error.message);
