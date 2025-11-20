@@ -1,15 +1,15 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState } from 'react';
 import { View, ScrollView, Alert, Platform } from 'react-native';
-import { 
-  Appbar, 
-  Text, 
-  TextInput, 
-  Button, 
-  Chip, 
-  Card, 
+import {
+
+  Text,
+  TextInput,
+  Button,
+  Chip,
+  Card,
   useTheme,
   Snackbar,
-  ActivityIndicator
+
 } from 'react-native-paper';
 import { useRouter } from 'expo-router';
 import { useForm, Controller } from 'react-hook-form';
@@ -37,7 +37,7 @@ const PHONE_PATTERN = /^\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}$/;
 const applyPhoneMask = (value: string): string => {
   const numbers = value.replace(/[^\d+]/g, '');
   let processed = numbers;
-  
+
   if (!processed.startsWith('+7') && !processed.startsWith('7') && !processed.startsWith('8')) {
     processed = '+7' + processed;
   } else if (processed.startsWith('7')) {
@@ -86,7 +86,7 @@ export default function CreateTaskScreen() {
   const styles = TaskFormStyles(theme);
   const { createTask } = useTasks();
   const router = useRouter();
-  
+
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState('');
   const [mapPickerVisible, setMapPickerVisible] = useState(false);
@@ -127,13 +127,13 @@ export default function CreateTaskScreen() {
   const phone = watch('phone');
   const description = watch('description');
 
-  const isFormValid = 
-    title?.trim() && 
-    customer?.trim() && 
-    phone?.trim() && 
-    description?.trim() && 
-    start_date && 
-    due_date && 
+  const isFormValid =
+    title?.trim() &&
+    customer?.trim() &&
+    phone?.trim() &&
+    description?.trim() &&
+    start_date &&
+    due_date &&
     startTime &&
     dueTime &&
     currentLocation &&
@@ -169,10 +169,10 @@ export default function CreateTaskScreen() {
 
   const formatTime = (time: Date | null) => {
     if (!time) return 'Выбрать время';
-    return time.toLocaleTimeString('ru-RU', { 
-      hour: '2-digit', 
+    return time.toLocaleTimeString('ru-RU', {
+      hour: '2-digit',
       minute: '2-digit',
-      hour12: false 
+      hour12: false
     });
   };
 
@@ -234,11 +234,11 @@ export default function CreateTaskScreen() {
 
       await createTask(submitData);
       setSnackbarMessage('Задача успешно создана');
-      
+
       setTimeout(() => {
         router.back();
       }, 1500);
-      
+
     } catch (error: any) {
       console.error('Error creating task:', error);
       setSnackbarMessage(error.message || 'Не удалось создать задачу');
@@ -253,7 +253,7 @@ export default function CreateTaskScreen() {
 
   return (
     <View style={styles.container}>
-     
+
       <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
         {/* Название задачи */}
         <Controller
@@ -406,12 +406,12 @@ export default function CreateTaskScreen() {
           </View>
         </View>
 
-        {start_date && due_date && startTime && dueTime && 
-         combineDateAndTime(start_date, startTime) >= combineDateAndTime(due_date, dueTime) && (
-          <Text style={styles.dateError}>
-            Дата и время окончания должны быть позже даты и времени начала
-          </Text>
-        )}
+        {start_date && due_date && startTime && dueTime &&
+          combineDateAndTime(start_date, startTime) >= combineDateAndTime(due_date, dueTime) && (
+            <Text style={styles.dateError}>
+              Дата и время окончания должны быть позже даты и времени начала
+            </Text>
+          )}
 
         {/* Местоположение */}
         <Text variant="titleMedium" style={styles.sectionTitle}>

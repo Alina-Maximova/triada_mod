@@ -1,9 +1,9 @@
 import { Tabs } from 'expo-router';
-import { useEffect, useRef } from 'react';
+
 import { useTheme } from 'react-native-paper';
 import { MaterialIcons } from '@expo/vector-icons';
 import { StatusBar } from 'expo-status-bar';
-i
+
 
 export default function TabsLayout() {
   const theme = useTheme();

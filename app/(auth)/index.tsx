@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, KeyboardAvoidingView, Platform, ScrollView, Linking } from 'react-native';
 import { TextInput, Button, Text, Card, Snackbar, useTheme } from 'react-native-paper';
 import { useAuth } from '@/hooks/useAuth';
-import { LoginData } from '@/services/task';
+import { LoginData } from '@/types';
 import { useRouter } from 'expo-router';
 import { AuthScreenStyles } from "@/styles/auth/AuthScreenStyles"
 
