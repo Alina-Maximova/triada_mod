@@ -56,7 +56,14 @@ function AppContent() {
       {!user ? (
         <Stack screenOptions={{ headerShown: false }}>
           <Stack.Screen name="(auth)" />
+           <Stack.Screen 
+          name="documentation" 
+          options={{ 
+            headerShown: false 
+          }} 
+        />
         </Stack>
+        
       ) : (
         <Stack screenOptions={{ headerShown: false }}>
           <Stack.Screen name="(tabs)" />

@@ -32,4 +32,19 @@ export const AuthScreenStyles = (theme: any) => StyleSheet.create({
     marginBottom: 8,
     color: theme.colors.primary,
   },
+    documentationContainer: {
+    alignItems: 'center',
+    marginTop: 24,
+    paddingTop: 20,
+    borderTopWidth: 1,
+    borderTopColor: theme.colors.outline,
+  },
+  documentationText: {
+    marginBottom: 12,
+    color: theme.colors.onSurfaceVariant,
+    textAlign: 'center',
+  },
+  documentationButton: {
+    marginVertical: 4,
+  },
 });

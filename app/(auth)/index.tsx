@@ -1,13 +1,13 @@
+// app/index.tsx (AuthScreen)
 import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, KeyboardAvoidingView, Platform, ScrollView } from 'react-native';
+import { View, StyleSheet, KeyboardAvoidingView, Platform, ScrollView, Linking } from 'react-native';
 import { TextInput, Button, Text, Card, Snackbar, useTheme } from 'react-native-paper';
 import { useAuth } from '@/hooks/useAuth';
-// eslint-disable-next-line import/no-unresolved
 import { LoginData } from '@/services/task';
 import { useRouter } from 'expo-router';
-import {AuthScreenStyles} from "@/styles/auth/AuthScreenStyles"
+import { AuthScreenStyles } from "@/styles/auth/AuthScreenStyles"
 
- function AuthScreen () {
+function AuthScreen() {
   const { user, login, isLoading } = useAuth();
   const router = useRouter();
   const [formData, setFormData] = useState({
@@ -16,14 +16,14 @@ import {AuthScreenStyles} from "@/styles/auth/AuthScreenStyles"
   });
   const [snackbarVisible, setSnackbarVisible] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState('');
-const theme = useTheme();
-const styles = AuthScreenStyles(theme); 
+  const theme = useTheme();
+  const styles = AuthScreenStyles(theme);
+
   useEffect(() => {
     if (user) {
-      console.log('User authenticated, redirecting to tasks...'); 
-      router.replace('/(tabs)');     
+      console.log('User authenticated, redirecting to tasks...');
+      router.replace('/(tabs)');
     }
-
   }, [user, router]);
 
   const handleSubmit = async () => {
@@ -38,7 +38,7 @@ const styles = AuthScreenStyles(theme);
         email: formData.email,
         password: formData.password
       };
-      
+
       const result = await login(loginData);
 
       console.log('Auth result:', result);
@@ -47,16 +47,19 @@ const styles = AuthScreenStyles(theme);
         setSnackbarMessage(result.message || 'Произошла ошибка');
         setSnackbarVisible(true);
       } else {
-        // Успешная авторизация - форма очистится автоматически
         setSnackbarMessage('Вход выполнен!');
         setSnackbarVisible(true);
-        // Перенаправление произойдет автоматически через useEffect
       }
     } catch (error: any) {
       console.log('Auth error:', error);
       setSnackbarMessage(error.message || 'Произошла ошибка');
       setSnackbarVisible(true);
     }
+  };
+
+  const handleOpenDocumentation = () => {
+    // Навигация к экрану документации вместо открытия в браузере
+    router.push('/documentation');
   };
 
   return (
@@ -101,10 +104,24 @@ const styles = AuthScreenStyles(theme);
             >
               Войти
             </Button>
+
+            {/* Ссылка на документацию внутри приложения */}
+            <View style={styles.documentationContainer}>
+              <Text variant="bodyMedium" style={styles.documentationText}>
+                Первый раз в приложении?
+              </Text>
+              <Button
+                mode="outlined"
+                onPress={handleOpenDocumentation}
+                style={styles.documentationButton}
+                icon="book-open-outline"
+                textColor={theme.colors.primary}
+              >
+                📚 Открыть руководство
+              </Button>
+            </View>
           </Card.Content>
         </Card>
-
-       
       </ScrollView>
 
       <Snackbar
@@ -120,8 +137,6 @@ const styles = AuthScreenStyles(theme);
       </Snackbar>
     </KeyboardAvoidingView>
   );
-};
-
-
+}
 
 export default AuthScreen;
