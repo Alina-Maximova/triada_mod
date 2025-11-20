@@ -58,7 +58,6 @@ function AuthScreen() {
   };
 
   const handleOpenDocumentation = () => {
-    // Навигация к экрану документации вместо открытия в браузере
     router.push('/documentation');
   };
 
