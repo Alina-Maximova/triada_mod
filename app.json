@@ -1,16 +1,16 @@
 {
   "expo": {
-    "name": "mob2",
-    "slug": "mob2",
+    "name": "triada",
+    "slug": "triada",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/logo.png",
-    "scheme": "mob2",
+    "scheme": "triada",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
       "infoPlist": {
-       "NSPhotoLibraryUsageDescription": "Это приложение использует фото-библиотеку для выбора изображений для отчетов",
+        "NSPhotoLibraryUsageDescription": "Это приложение использует фото-библиотеку для выбора изображений для отчетов",
         "NSCameraUsageDescription": "Это приложение использует камеру для съемки фото для отчетов",
         "NSPhotoLibraryAddUsageDescription": "Это приложение сохраняет фото в вашу галерею"
       },
@@ -19,9 +19,9 @@
     "android": {
       "adaptiveIcon": {
         "backgroundColor": "#E6F4FE",
-        "foregroundImage": "./assets/images/logo.png",
-        "backgroundImage": "./assets/images/android-icon-background.png",
-        "monochromeImage": "./assets/images/logo.png"
+        "foregroundImage": "./assets/images/log1.png",
+        "backgroundImage": "./assets/images/background.png",
+        "monochromeImage": "./assets/images/log1.png"
       },
       "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false,
@@ -34,13 +34,15 @@
         "android.permission.READ_MEDIA_VISUAL_USER_SELECTED",
         "android.permission.READ_MEDIA_IMAGES",
         "android.permission.READ_MEDIA_VIDEO",
-        "android.permission.READ_MEDIA_AUDIO"
+        "android.permission.READ_MEDIA_AUDIO",
+        "android.permission.ACCESS_COARSE_LOCATION",
+        "android.permission.ACCESS_FINE_LOCATION"
       ],
-      "package": "com.alinamaxi.mob2"
+      "package": "com.alinamaxi.triada"
     },
     "web": {
       "output": "static",
-      "favicon": "./assets/images/favicon.png"
+      "favicon": "./assets/images/logo.png"
     },
     "plugins": [
       "expo-router",
@@ -64,7 +66,6 @@
           "isAccessMediaLocationEnabled": true
         }
       ],
-      
       [
         "expo-image-picker",
         {
@@ -95,7 +96,7 @@
     "extra": {
       "router": {},
       "eas": {
-        "projectId": "a0d7fce9-a930-4e98-8341-7139e3fa8dc9"
+        "projectId": "03fcced2-c150-4c9f-be44-428f44b2efc7"
       }
     }
   }
