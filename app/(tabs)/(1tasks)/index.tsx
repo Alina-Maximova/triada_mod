@@ -437,14 +437,14 @@ export default function TasksScreen() {
           onPress={() => setShowAllTasks(false)}
           style={styles.toggleButton}
         >
-          Предстоящие ({upcomingTasks.length})
+          Новые ({upcomingTasks.length})
         </Button>
         <Button
           mode={showAllTasks ? "contained" : "outlined"}
           onPress={() => setShowAllTasks(true)}
           style={styles.toggleButton}
         >
-          Все задачи ({allTasksSorted.length})
+          Все  ({allTasksSorted.length})
         </Button>
       </View>
 

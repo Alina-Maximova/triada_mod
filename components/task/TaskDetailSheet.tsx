@@ -82,38 +82,44 @@ const getStatusData = (status: string, theme: AppTheme) => {
       return {
         label: 'Выполнено',
         color: theme.colors.status.completed,
-        icon: 'check-circle'
+        icon: 'check-circle',
+        backgroundColor: theme.colors.status.completedContainer
       };
     case 'in_progress':
       return {
         label: 'В работе',
         color: theme.colors.status.inProgress,
-        icon: 'progress-clock'
+        icon: 'progress-clock',
+        backgroundColor: theme.colors.status.inProgressContainer
       };
     case 'paused':
       return {
         label: 'На паузе',
         color: theme.colors.status.paused,
-        icon: 'pause-circle'
+        icon: 'pause-circle',
+        backgroundColor: theme.colors.status.pausedContainer
       };
     case 'report_added':
       return {
         label: 'Добавлен отчет',
         color: theme.colors.status.reportAdded,
-        icon: 'file-document'
+        icon: 'file-document',
+        backgroundColor: theme.colors.status.reportAddedContainer
       };
     case 'accepted_by_customer':
       return {
         label: 'Принято заказчиком',
         color: theme.colors.status.accepted,
-        icon: 'account-check'
+        icon: 'account-check',
+        backgroundColor: theme.colors.status.acceptedContainer
       };
     case 'new':
     default:
       return {
         label: 'Новая',
         color: theme.colors.status.new,
-        icon: 'clock-outline'
+        icon: 'clock-outline',
+        backgroundColor: theme.colors.status.newContainer
       };
   }
 };
@@ -140,11 +146,11 @@ const getStatusChangeDescription = (currentStatus: string, newStatus: string): s
   if (newStatus === 'paused') {
     return 'При изменении статуса на "Пауза" необходимо указать причину приостановки задачи.';
   }
-  
+
   if (currentStatus === 'new' && newStatus === 'in_progress') {
     return 'Задача будет перемещена в работу. Вы сможете продолжить редактирование и в конечном итоге отметить её как выполненную.';
   }
-  
+
   if (currentStatus === 'in_progress' && newStatus === 'completed') {
     return 'Задача будет отмечена как выполненная. После этого вы сможете создать отчёт по задаче.';
   }
@@ -152,7 +158,7 @@ const getStatusChangeDescription = (currentStatus: string, newStatus: string): s
   if (currentStatus === 'report_added' && newStatus === 'accepted_by_customer') {
     return 'Заказчик подтвердил выполнение работы. Задача будет считаться полностью завершенной.';
   }
-  
+
   return 'Это действие изменит статус задачи.';
 };
 
@@ -209,12 +215,12 @@ const getAvailableStatuses = (currentStatus: string): string[] => {
 // Функция для форматирования комментария паузы
 const formatPauseComment = (comment: string): string => {
   const prefix = 'Причина постановки на паузы:';
-  
+
   // Если комментарий уже начинается с префикса, возвращаем как есть
   if (comment.trim().toLowerCase().startsWith(prefix.toLowerCase())) {
     return comment.trim();
   }
-  
+
   // Иначе добавляем префикс
   return `${prefix} ${comment.trim()}`;
 };
@@ -235,10 +241,10 @@ export const TaskDetailSheet: React.FC<TaskDetailSheetProps> = ({
   const webViewRef = useRef<WebView>(null);
   const [isMapLoading, setIsMapLoading] = useState(true);
   const [statusMenuVisible, setStatusMenuVisible] = useState(false);
-  
+
   // Состояния для диалогового окна
   const [dialogVisible, setDialogVisible] = useState(false);
-  const [pendingStatusChange, setPendingStatusChange] = useState<{newStatus: string} | null>(null);
+  const [pendingStatusChange, setPendingStatusChange] = useState<{ newStatus: string } | null>(null);
 
   // Состояния для отчета
   const [taskReport, setTaskReport] = useState<Report | null>(null);
@@ -335,7 +341,7 @@ export const TaskDetailSheet: React.FC<TaskDetailSheetProps> = ({
 
   const handleCommentSave = async (comment: string) => {
     if (!task) return;
-    
+
     try {
       setIsAddingComment(true);
       await onAddComment(task.id, comment);
@@ -388,10 +394,10 @@ export const TaskDetailSheet: React.FC<TaskDetailSheetProps> = ({
     if (task && pendingStatusChange) {
       try {
         setIsAddingComment(true);
-        
+
         // Форматируем комментарий для паузы
         const formattedComment = formatPauseComment(comment);
-        
+
         // Сначала добавляем комментарий
         await onAddComment(task.id, formattedComment);
         // Затем меняем статус
@@ -526,8 +532,8 @@ export const TaskDetailSheet: React.FC<TaskDetailSheetProps> = ({
               Комментарии
             </Text>
             <Text variant="bodySmall" style={{ color: theme.colors.onSurfaceVariant }}>
-              {comments.length === 0 
-                ? 'Нет комментариев' 
+              {comments.length === 0
+                ? 'Нет комментариев'
                 : `Количество комментариев: ${comments.length}`
               }
             </Text>
@@ -560,7 +566,7 @@ export const TaskDetailSheet: React.FC<TaskDetailSheetProps> = ({
             <Text variant="headlineSmall" style={styles.sheetTitle} numberOfLines={1}>
               {task.title}
             </Text>
-            <Text variant="bodyMedium" style={{ 
+            <Text variant="bodyMedium" style={{
               color: theme.colors.onSurfaceVariant,
               marginTop: 2
             }} numberOfLines={1}>
@@ -582,18 +588,18 @@ export const TaskDetailSheet: React.FC<TaskDetailSheetProps> = ({
                 <Chip
                   mode="outlined"
                   icon={currentStatusData.icon}
-                  textStyle={{ 
-                    fontSize: 12, 
-                    color: currentStatusData.color,
-                    fontWeight: '500'
-                  }}
+                  textStyle={[
+                    styles.chipText,
+                    { color: currentStatusData.color }
+                  ]}
                   style={[
-                    styles.statusChip, 
-                    { 
+                    styles.statusChip,
+                    {
                       borderColor: currentStatusData.color,
-                      backgroundColor: 'transparent'
+                      backgroundColor: currentStatusData.backgroundColor
                     }
                   ]}
+                  contentStyle={styles.chipContent}
                 >
                   {currentStatusData.label}
                 </Chip>
@@ -605,16 +611,15 @@ export const TaskDetailSheet: React.FC<TaskDetailSheetProps> = ({
                     <Chip
                       mode="outlined"
                       icon={currentStatusData.icon}
-                      textStyle={{ 
-                        fontSize: 12, 
-                        color: currentStatusData.color,
-                        fontWeight: '500'
-                      }}
+                      textStyle={[
+                        styles.chipText,
+                        { color: currentStatusData.color }
+                      ]}
                       style={[
-                        styles.statusChip, 
-                        { 
+                        styles.statusChip,
+                        {
                           borderColor: currentStatusData.color,
-                          backgroundColor: 'transparent'
+                          backgroundColor: currentStatusData.backgroundColor
                         }
                       ]}
                       onPress={() => setStatusMenuVisible(true)}
@@ -665,8 +670,8 @@ export const TaskDetailSheet: React.FC<TaskDetailSheetProps> = ({
 
             {(task.status === 'completed' || task.status === 'accepted_by_customer') && (
               <Text variant="bodySmall" style={{ marginTop: 8, color: theme.colors.onSurfaceVariant }}>
-                {task.status === 'completed' 
-                  ? 'Задача выполнена. Статус нельзя изменить.' 
+                {task.status === 'completed'
+                  ? 'Задача выполнена. Статус нельзя изменить.'
                   : 'Задача принята заказчиком. Статус нельзя изменить.'
                 }
               </Text>
@@ -686,7 +691,7 @@ export const TaskDetailSheet: React.FC<TaskDetailSheetProps> = ({
               <View style={styles.sheetDivider} />
             </>
           )}
-         
+
           {/* Заказчик */}
           {task.customer && (
             <>
@@ -897,7 +902,7 @@ export const TaskDetailSheet: React.FC<TaskDetailSheetProps> = ({
               </View>
             )}
           </View>
-          
+
         </BottomSheetScrollView>
 
         <View style={styles.sheetActions}>
@@ -912,23 +917,23 @@ export const TaskDetailSheet: React.FC<TaskDetailSheetProps> = ({
             >
               {/* Пустой текст - только иконка */}
             </Button>
-         
-              <View style={{
-                position: 'absolute',
-                top: -5,
-                right: -5,
-                zIndex: 1,
-              }}>
-                <Badge 
-                  size={20}
-                  style={{
-                    backgroundColor: theme.colors.primary,
-                  }}
-                >
+
+            <View style={{
+              position: 'absolute',
+              top: -5,
+              right: -5,
+              zIndex: 1,
+            }}>
+              <Badge
+                size={20}
+                style={{
+                  backgroundColor: theme.colors.primary,
+                }}
+              >
                 {comments.length}
-                </Badge>
-              </View>
-         
+              </Badge>
+            </View>
+
           </View>
 
           {/* Кнопка добавления комментария */}
@@ -941,7 +946,7 @@ export const TaskDetailSheet: React.FC<TaskDetailSheetProps> = ({
           >
             {/* Пустой текст - только иконка */}
           </Button>
-          
+
           {/* Кнопка создания отчета для выполненных задач без отчета */}
           {task.status === 'completed' && !taskReport && (
             <Button
@@ -992,20 +997,20 @@ export const TaskDetailSheet: React.FC<TaskDetailSheetProps> = ({
           </Dialog.Title>
           <Dialog.Content>
             <Text variant="bodyMedium" style={{ marginBottom: 8 }}>
-              {task && pendingStatusChange && 
+              {task && pendingStatusChange &&
                 getConfirmationMessage(task.status, pendingStatusChange.newStatus)
               }
             </Text>
             <Text variant="bodySmall" style={{ color: theme.colors.onSurfaceVariant }}>
-              {task && pendingStatusChange && 
+              {task && pendingStatusChange &&
                 getStatusChangeDescription(task.status, pendingStatusChange.newStatus)
               }
             </Text>
           </Dialog.Content>
           <Dialog.Actions>
             <Button onPress={cancelStatusChange}>Отмена</Button>
-            <Button 
-              mode="contained" 
+            <Button
+              mode="contained"
               onPress={confirmStatusChange}
               style={{ marginLeft: 8 }}
             >
@@ -1031,3 +1036,4 @@ export const TaskDetailSheet: React.FC<TaskDetailSheetProps> = ({
     </>
   );
 };
+

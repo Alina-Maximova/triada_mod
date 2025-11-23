@@ -54,19 +54,41 @@ export const TaskListStyles = (theme: any) => StyleSheet.create({
     color: theme.colors.onSurface,
   },
 
-  // Стили для чипов
+  // Стили для чипов - ИСПРАВЛЕНО
   statusChip: {
-    height: 28,
+    height: 40,
+    borderWidth: 1,
+    justifyContent: 'center',
   },
   overdueChip: {
-    height: 28,
+    height: 40, // Выровнено с statusChip
     borderWidth: 1,
     borderColor: theme.colors.error,
+    justifyContent: 'center',
   },
   reportChip: {
-    height: 28,
+    height: 40, // Выровнено с statusChip
     borderWidth: 1,
     borderColor: theme.colors.primary,
+    justifyContent: 'center',
+  },
+
+  chipText: {
+    fontSize: 12,
+    fontWeight: '500',
+    lineHeight: 16,
+    textAlign: 'center',
+    textAlignVertical: 'center',
+    includeFontPadding: false,
+  },
+
+  // Контент стили для правильного выравнивания
+  chipContent: {
+    paddingHorizontal: 8,
+    paddingVertical: 0,
+    height: 40,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 
   // Стили для информации о задаче
@@ -126,16 +148,19 @@ export const TaskListStyles = (theme: any) => StyleSheet.create({
   },
 
   dateChip: {
-    height: 28,
+    height: 40, // Выровнено с statusChip
     backgroundColor: theme.colors.surfaceVariant,
+    justifyContent: 'center',
   },
   reminderChip: {
-    height: 28,
+    height: 40, // Выровнено с statusChip
     backgroundColor: theme.colors.surfaceVariant,
+    justifyContent: 'center',
   },
   idChip: {
-    height: 28,
+    height: 40, // Выровнено с statusChip
     backgroundColor: theme.colors.surfaceVariant,
+    justifyContent: 'center',
   },
 
   // Стили для FAB

@@ -2,20 +2,39 @@
   "expo": {
     "name": "triada",
     "slug": "triada",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "orientation": "portrait",
     "icon": "./assets/images/logo.png",
     "scheme": "triada",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
+    
     "ios": {
       "infoPlist": {
         "NSPhotoLibraryUsageDescription": "Это приложение использует фото-библиотеку для выбора изображений для отчетов",
         "NSCameraUsageDescription": "Это приложение использует камеру для съемки фото для отчетов",
-        "NSPhotoLibraryAddUsageDescription": "Это приложение сохраняет фото в вашу галерею"
+        "NSPhotoLibraryAddUsageDescription": "Это приложение сохраняет фото в вашу галерею",
+        "NSAppTransportSecurity": {
+          "NSAllowsArbitraryLoads": true,
+          "NSExceptionDomains": {
+            "194.87.238.237": {
+              "NSExceptionAllowsInsecureHTTPLoads": true,
+              "NSIncludesSubdomains": true
+            },
+            "localhost": {
+              "NSExceptionAllowsInsecureHTTPLoads": true,
+              "NSIncludesSubdomains": true
+            },
+            "10.0.2.2": {
+              "NSExceptionAllowsInsecureHTTPLoads": true,
+              "NSIncludesSubdomains": true
+            }
+          }
+        }
       },
       "supportsTablet": true
     },
+    
     "android": {
       "adaptiveIcon": {
         "backgroundColor": "#E6F4FE",
@@ -25,6 +44,7 @@
       },
       "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false,
+      "usesCleartextTraffic": true,
       "permissions": [
         "android.permission.READ_EXTERNAL_STORAGE",
         "android.permission.WRITE_EXTERNAL_STORAGE",
@@ -36,14 +56,18 @@
         "android.permission.READ_MEDIA_VIDEO",
         "android.permission.READ_MEDIA_AUDIO",
         "android.permission.ACCESS_COARSE_LOCATION",
-        "android.permission.ACCESS_FINE_LOCATION"
+        "android.permission.ACCESS_FINE_LOCATION",
+        "android.permission.INTERNET"
       ],
       "package": "com.alinamaxi.triada"
     },
+    
     "web": {
       "output": "static",
-      "favicon": "./assets/images/logo.png"
+      "favicon": "./assets/images/logo.png",
+      "bundler": "metro"
     },
+    
     "plugins": [
       "expo-router",
       [
@@ -87,17 +111,34 @@
           "defaultVibrate": true
         }
       ],
-      "expo-web-browser"
+      "expo-web-browser",
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "usesCleartextTraffic": true,
+            "networkSecurityConfig": "@xml/network_security_config"
+          },
+          "ios": {
+            "usesNonExemptEncryption": false
+          }
+        }
+      ]
     ],
+    
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
     },
+    
     "extra": {
-      "router": {},
+      "router": {
+        "origin": false
+      },
       "eas": {
         "projectId": "03fcced2-c150-4c9f-be44-428f44b2efc7"
-      }
+      },
+      "apiUrl": "http://194.87.238.237:5000"
     }
   }
 }

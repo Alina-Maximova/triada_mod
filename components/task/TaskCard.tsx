@@ -8,7 +8,7 @@ import { StatusChip } from './StatusChip';
 import { TaskListStyles } from '@/styles/task/TaskListStyles';
 
 interface TaskCardProps {
-  task: Task & { 
+  task: Task & {
     isOverdue?: boolean;
   };
   onEditTask: (task: Task) => void;
@@ -84,15 +84,19 @@ export const TaskCard: React.FC<TaskCardProps> = ({
             {task.isOverdue && (
               <Chip
                 mode="outlined"
-                textStyle={{ fontSize: 12, color: theme.colors.error }}
+                textStyle={[
+                  styles.chipText,
+                  { color: theme.colors.error } // Красный цвет текста
+                ]}
                 style={[styles.overdueChip, { borderColor: theme.colors.error }]}
                 icon="alert"
+                contentStyle={styles.chipContent}
               >
-                Просрочено
+                Просрочка
               </Chip>
             )}
           </View>
-          
+
           <View style={styles.taskActions}>
             <Menu
               visible={menuVisible}
@@ -176,11 +180,11 @@ export const TaskCard: React.FC<TaskCardProps> = ({
           </View>
         )}
 
-        {/* Адрес */}
+        {/* Адрес - УБРАН numberOfLines={1} для полного отображения */}
         {task.address && (
           <View style={styles.addressContainer}>
             <MaterialIcons name="location-on" size={16} color="#007AFF" />
-            <Text variant="bodySmall" style={styles.addressText} numberOfLines={1}>
+            <Text variant="bodySmall" style={styles.addressText}>
               {task.address}
             </Text>
           </View>
