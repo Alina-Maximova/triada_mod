@@ -444,7 +444,7 @@ export default function TasksScreen() {
           onPress={() => setShowAllTasks(true)}
           style={styles.toggleButton}
         >
-          Все  ({allTasksSorted.length})
+          Все ({allTasksSorted.length})
         </Button>
       </View>
 
