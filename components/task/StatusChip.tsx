@@ -2,7 +2,7 @@
 import React from 'react';
 import { Chip, useTheme } from 'react-native-paper';
 import { StyleSheet, Dimensions, useWindowDimensions } from 'react-native';
-import { AppTheme } from '@/styles/theme';
+import { AppTheme } from '@/constants/theme';
 
 interface StatusChipProps {
   status: string;

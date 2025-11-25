@@ -74,38 +74,7 @@ export const useReports = () => {
     }
   };
 
-  // Получение отчета по ID
-  const getReportById = async (id: number) => {
-    try {
-      setIsLoading(true);
-      setError(null);
-      const report = await reportService.getReportById(id);
-      return report;
-    } catch (err: any) {
-      setError(err.message || 'Ошибка при получении отчета');
-      throw err;
-    } finally {
-      setIsLoading(false);
-    }
-  };
 
-  // Обновление отчета
-  const updateReport = async (id: number, reportData: Partial<Report>) => {
-    try {
-      setIsLoading(true);
-      setError(null);
-      const updatedReport = await reportService.updateReport(id, reportData);
-      setReports(prev => prev.map(report => 
-        report.id === id ? updatedReport : report
-      ));
-      return updatedReport;
-    } catch (err: any) {
-      setError(err.message || 'Ошибка при обновлении отчета');
-      throw err;
-    } finally {
-      setIsLoading(false);
-    }
-  };
 
   // Удаление отчета
   const deleteReport = async (id: number) => {
@@ -164,8 +133,7 @@ export const useReports = () => {
     loadReportsByDateRange,
     createReport,
     getReportByTaskId,
-    getReportById,
-    updateReport,
+
     deleteReport,
     uploadPhotos,
   };

@@ -21,7 +21,6 @@ import { useComments } from '@/hooks/useComments';
 
 interface ExtendedTaskListProps {
   tasks: Task[];
-  onToggleTask: (taskId: number) => void;
   onDeleteTask: (taskId: number) => void;
   onUpdateTaskStatus: (taskId: number, newStatus: string, pauseReason?: string) => void;
   onEditTask: (task: Task) => void;
@@ -34,7 +33,7 @@ interface ExtendedTaskListProps {
 
 export const TaskList: React.FC<ExtendedTaskListProps> = ({
   tasks,
-  onToggleTask,
+
   onDeleteTask,
   onUpdateTaskStatus,
   onEditTask,

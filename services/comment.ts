@@ -53,12 +53,5 @@ export const commentsAPI = {
     }
   },
 
-  deleteComment: async (id: number): Promise<void> => {
-    try {
-      await api.delete(`/comments/${id}`);
-    } catch (error: any) {
-      const message = error.response?.data?.message || 'Ошибка удаления комментария';
-      throw new Error(message);
-    }
-  },
+
 };

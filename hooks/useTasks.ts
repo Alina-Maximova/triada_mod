@@ -22,18 +22,7 @@ export const useTasks = () => {
     }
   };
 
-  const loadTasksNew = async () => {
-    try {
-      setIsLoading(true);
-      setError(null);
-      const tasksData = await tasksAPI.getTasksNew();
-      setTasks(tasksData);
-    } catch (err: any) {
-      setError(err.message || 'Ошибка загрузки задач');
-    } finally {
-      setIsLoading(false);
-    }
-  };
+
 
   const createTask = async (data: CreateTaskData) => {
     try {
@@ -76,15 +65,7 @@ export const useTasks = () => {
     }
   };
 
-  const toggleTask = async (id: number) => {
-    try {
-      const updatedTask = await tasksAPI.toggleTask(id);
-      await loadTasks();
-      return updatedTask;
-    } catch (err: any) {
-      throw err;
-    }
-  };
+
 
   const refreshTasks = () => {
     setRefreshTrigger(prev => prev + 1);
@@ -102,8 +83,6 @@ export const useTasks = () => {
     createTask,
     updateTask,
     deleteTask,
-    toggleTask,
-    loadTasksNew,
     updateTaskStatus,
     refreshTasks
   };

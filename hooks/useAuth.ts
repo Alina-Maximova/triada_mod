@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import * as SecureStore from 'expo-secure-store';
-import { User, LoginData } from '../types';
-import { authAPI } from '../services/task';
-import { STORAGE_KEYS } from '../constants';
+import { User, LoginData } from '@/types';
+import { authAPI } from '@/services/task';
+import { STORAGE_KEYS } from '@/constants';
 
 export const useAuth = () => {
     const [user, setUser] = useState<User | null>(null);

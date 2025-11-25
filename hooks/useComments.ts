@@ -34,16 +34,6 @@ export const useComments = () => {
     }
   }, []);
 
-  const deleteComment = useCallback(async (id: number) => {
-    try {
-      setError(null);
-      await commentsAPI.deleteComment(id);
-      setComments(prev => prev.filter(comment => comment.id !== id));
-    } catch (err: any) {
-      setError(err.message || 'Ошибка удаления комментария');
-      throw err;
-    }
-  }, []);
 
   const clearComments = useCallback(() => {
     setComments([]);
@@ -60,7 +50,6 @@ export const useComments = () => {
     error,
     loadTaskComments,
     addComment,
-    deleteComment,
     clearComments,
     refreshComments, // Добавляем метод для обновления
   };

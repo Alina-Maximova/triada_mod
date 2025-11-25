@@ -7,14 +7,13 @@ import { ReportStyles } from '@/styles/report/ReportStyles';
 
 interface ReportCardProps {
   report: Report;
-  onEdit: (report: Report) => void;
   onDelete: (report: Report) => void;
   deletingId?: number | null;
+  
 }
 
 export const ReportCard: React.FC<ReportCardProps> = ({ 
   report, 
-  onEdit, 
   onDelete, 
   deletingId 
 }) => {
@@ -32,10 +31,6 @@ export const ReportCard: React.FC<ReportCardProps> = ({
     });
   };
 
-  const handleEdit = () => {
-    setMenuVisible(false);
-    onEdit(report);
-  };
 
   const handleDelete = () => {
     setMenuVisible(false);
@@ -66,11 +61,7 @@ export const ReportCard: React.FC<ReportCardProps> = ({
                 />
               }
             >
-              <Menu.Item
-                leadingIcon="pencil"
-                onPress={handleEdit}
-                title="Редактировать"
-              />
+
               <Menu.Item
                 leadingIcon="delete"
                 onPress={handleDelete}

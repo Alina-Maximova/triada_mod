@@ -2,6 +2,14 @@
 import { StyleSheet } from 'react-native';
 
 export const ReportListStyles = (theme: any) => StyleSheet.create({
+    // Стили для состояний загрузки и пустого списка
+  center: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 20,
+    backgroundColor: theme.colors.background,
+  },
   // Основные стили контейнера
   container: {
     flex: 1,

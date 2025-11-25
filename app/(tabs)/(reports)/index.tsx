@@ -244,12 +244,7 @@ export default function ReportsScreen() {
     }
   };
 
-  const handleEditReport = (report: Report) => {
-    router.push({
-      pathname: '/reports/edit',
-      params: { reportId: report.id.toString() }
-    });
-  };
+
 
   const handleLogout = async () => {
     try {
@@ -271,7 +266,6 @@ export default function ReportsScreen() {
   const renderReportItem = ({ item }: { item: Report }) => (
     <ReportCard
       report={item}
-      onEdit={handleEditReport}
       onDelete={showDeleteDialog}
       deletingId={deletingReportId}
     />

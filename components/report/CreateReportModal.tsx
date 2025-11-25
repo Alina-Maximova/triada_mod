@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, ScrollView, Image, Dimensions, Alert } from 'react-native';
+import { View, ScrollView, Image, Alert } from 'react-native';
 import {
   Appbar,
   Text,
@@ -7,14 +7,12 @@ import {
   Button,
   useTheme,
   IconButton,
-  ActivityIndicator,
-  Snackbar,
-  Card
+  Snackbar
 } from 'react-native-paper';
 import { useLocalSearchParams, router } from 'expo-router';
 import * as ImagePicker from 'expo-image-picker';
 import { useReports } from '@/hooks/useReports';
-import { Task, CreateReportData } from '@/types';
+import { Task } from '@/types';
 import { ReportFormStyles } from '@/styles/report/ReportFormStyles';
 
 interface PhotoAsset {

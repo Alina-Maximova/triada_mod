@@ -1,7 +1,7 @@
 // components/report/ReportDetailSheet.tsx
 import React, { useState, useCallback } from 'react';
-import { View, ScrollView, Image, Dimensions, Linking, Modal, TouchableOpacity } from 'react-native';
-import { Text, Button, IconButton, useTheme, Chip, Divider, ActivityIndicator } from 'react-native-paper';
+import { View, Image, Dimensions, Modal, TouchableOpacity } from 'react-native';
+import { Text, IconButton, useTheme, Divider, ActivityIndicator } from 'react-native-paper';
 import { MaterialIcons } from '@expo/vector-icons';
 import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
 import { Report } from '@/types/index';

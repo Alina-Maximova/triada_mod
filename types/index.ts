@@ -28,7 +28,7 @@ export interface Task {
   startDate: string;
   dueDate: string;
   location?: Location;
-  status: 'new' | 'in_progress' | 'paused' | 'completed' | 'accepted';
+  status: 'new' | 'in_progress' | 'paused' | 'completed' | 'accepted'|  'report_added' | 'accepted_by_customer';
   pause_reason?: string;
   createdAt: string;
   updatedAt: string;
@@ -117,7 +117,8 @@ export interface Report {
   task_title: string;
   customer: string;
   address?: string;
-  photos: string[];
+  photo_urls: string[];
+  report_date: string;
 }
 
 export interface CreateReportData {

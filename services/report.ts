@@ -82,49 +82,9 @@ export const reportService = {
     }
   },
 
-  // Получение отчета по ID
-  async getReportById(id: number): Promise<Report> {
-    try {
-      const response = await fetch(`${API_BASE_URL}/reports/${id}`);
-      
-      if (!response.ok) {
-        if (response.status === 404) {
-          throw new Error('Отчет не найден');
-        }
-        throw new Error(`Ошибка при получении отчета: ${response.status}`);
-      }
 
-      return await response.json();
-    } catch (error) {
-      console.error('Ошибка в getReportById:', error);
-      throw error;
-    }
-  },
 
-  // Обновление отчета
-  async updateReport(id: number, reportData: Partial<Report>): Promise<Report> {
-    try {
-      const response = await fetch(`${API_BASE_URL}/reports/${id}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(reportData),
-      });
-
-      if (!response.ok) {
-        const errorText = await response.text();
-        console.error('Ошибка при обновлении отчета:', errorText);
-        throw new Error(`Ошибка при обновлении отчета: ${response.status}`);
-      }
-
-      return await response.json();
-    } catch (error) {
-      console.error('Ошибка в updateReport:', error);
-      throw error;
-    }
-  },
-
+  
   // Удаление отчета
   async deleteReport(id: number): Promise<void> {
     try {
@@ -195,73 +155,4 @@ export const reportService = {
     return `${API_BASE_URL}/photos/reports/${filename}`;
   },
 
-  // Получение отчетов по статусу
-  async getReportsByStatus(status: string): Promise<Report[]> {
-    try {
-      const response = await fetch(`${API_BASE_URL}/reports/status/${status}`);
-      
-      if (!response.ok) {
-        throw new Error(`Ошибка при получении отчетов по статусу: ${response.status}`);
-      }
-
-      return await response.json();
-    } catch (error) {
-      console.error('Ошибка в getReportsByStatus:', error);
-      throw error;
-    }
-  },
-
-  // Получение отчетов по пользователю
-  async getReportsByUser(userId: number): Promise<Report[]> {
-    try {
-      const response = await fetch(`${API_BASE_URL}/reports/user/${userId}`);
-      
-      if (!response.ok) {
-        throw new Error(`Ошибка при получении отчетов пользователя: ${response.status}`);
-      }
-
-      return await response.json();
-    } catch (error) {
-      console.error('Ошибка в getReportsByUser:', error);
-      throw error;
-    }
-  },
-
-  // Экспорт отчетов в PDF
-  async exportReportsToPdf(reportIds: number[]): Promise<Blob> {
-    try {
-      const response = await fetch(`${API_BASE_URL}/reports/export/pdf`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ reportIds }),
-      });
-
-      if (!response.ok) {
-        throw new Error(`Ошибка при экспорте отчетов: ${response.status}`);
-      }
-
-      return await response.blob();
-    } catch (error) {
-      console.error('Ошибка в exportReportsToPdf:', error);
-      throw error;
-    }
-  },
-
-  // Статистика по отчетам
-  async getReportsStats(): Promise<any> {
-    try {
-      const response = await fetch(`${API_BASE_URL}/reports/stats`);
-      
-      if (!response.ok) {
-        throw new Error(`Ошибка при получении статистики: ${response.status}`);
-      }
-
-      return await response.json();
-    } catch (error) {
-      console.error('Ошибка в getReportsStats:', error);
-      throw error;
-    }
-  },
 };

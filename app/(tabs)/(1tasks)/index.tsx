@@ -17,8 +17,8 @@ import { useComments } from '@/hooks/useComments';
 import { useNotifications } from '@/hooks/useNotifications';
 
 export default function TasksScreen() {
-  const { user, logout } = useAuth();
-  const { tasks, isLoading, deleteTask, toggleTask, updateTaskStatus, refreshTasks } = useTasks();
+  const {  logout } = useAuth();
+  const { tasks, isLoading, deleteTask, updateTaskStatus, refreshTasks } = useTasks();
   const { getReportByTaskId } = useReports();
   const { addComment } = useComments();
   const {
@@ -450,7 +450,6 @@ export default function TasksScreen() {
 
       <TaskList
         tasks={displayedTasks}
-        onToggleTask={toggleTask}
         onDeleteTask={handleDeleteTask}
         onUpdateTaskStatus={handleUpdateTaskStatus}
         onEditTask={handleEditTask}
